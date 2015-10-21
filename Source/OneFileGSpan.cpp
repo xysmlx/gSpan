@@ -41,6 +41,26 @@ struct Edge
 	~Edge() {}
 };
 
+struct DFSCodeNode
+{
+	int a, b;
+	int la, lb;
+	int lab;
+	DFSCodeNode(int _a = -1, int _b = -1, int _la = -1, int _lab = -1, int _b = -1): a(_a), b(_b), la(_la), lab(_lab), lb(_lb) {}
+	~DFSCodeNode() {}
+
+	bool operator < (const DFSCodeNode &o) const
+	{
+		//
+		return 0;
+	}
+};
+
+struct DFSCode
+{
+	//
+};
+
 struct Graph
 {
 	const static int maxv = 1010;
