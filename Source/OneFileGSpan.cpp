@@ -27,7 +27,8 @@ struct Vertex
 {
 	int id;
 	int label;
-	Vertex(int _id = 0, int _label = 0): id(_id), label(_label) {}
+	bool del;
+	Vertex(int _id = 0, int _label = 0): id(_id), label(_label), del(0) {}
 	~Vertex() {}
 };
 
@@ -37,7 +38,8 @@ struct Edge
 	int v;
 	int label;
 	int next;
-	Edge(int _u = 0, int _v = 0, int _label = 0, int _next = -1): u(_u), v(_v), label(_label), next(_next) {}
+	bool del;
+	Edge(int _u = 0, int _v = 0, int _label = 0, int _next = -1): u(_u), v(_v), label(_label), next(_next), del(0) {}
 	~Edge() {}
 };
 
@@ -63,15 +65,6 @@ struct DFSCode
 class Graph
 {
 public:
-	const static int maxv = 1010;
-	const static int maxe = 5010;
-
-	int head[maxv];
-	int vn;
-	int en;
-	Vertex vtx[maxv]; // 0 to vn-1
-	Edge edge[maxe]; // 0 to en-1
-
 	Graph()
 	{
 		memset(head, -1, sizeof(head));
@@ -102,16 +95,22 @@ public:
 		addse(u, v, label);
 		addse(v, u, label);
 	}
+
+public:
+	const static int maxv = 1010;
+	const static int maxe = 5010;
+
+public:
+	int head[maxv];
+	int vn;
+	int en;
+	Vertex vtx[maxv]; // 0 to vn-1
+	Edge edge[maxe]; // 0 to en-1
 };
 
 class InputFilter
 {
 public:
-	const static int maxv = 1010;
-	const static int maxe = 5010;
-
-	int therK;
-
 	struct Node
 	{
 		int id;
@@ -123,13 +122,7 @@ public:
 		}
 	};
 
-	int cntv[maxv], cnte[maxe];
-	int mpv[maxv], mpe[maxe];
-	vector<Vertex> vecv;
-	vector<Edge> vece;
-	vector<int> listv, liste;
-	vector<Node> filterv, filtere;
-
+public:
 	void init()
 	{
 		memset(cntv, 0, sizeof(cntv));
@@ -158,8 +151,7 @@ public:
 	void filterV()
 	{
 		for (int i = 0; i < listv.size(); i++)
-			if (cntv[listv[i]] >= therK)
-				filterv.pb(Node(listv[i], cntv[listv[i]]));
+			filterv.pb(Node(listv[i], cntv[listv[i]]));
 		sort(filterv.begin(), filterv.end());
 		for (int i = 0; i < filterv.size(); i++)
 			mpv[filterv[i]] = i + 2;
@@ -167,43 +159,64 @@ public:
 	void filterE()
 	{
 		for (int i = 0; i < liste.size(); i++)
-			if (cnte[liste[i]] >= therK)
-				filtere.pb(Node(liste[i], cnte[liste[i]]));
+			filtere.pb(Node(liste[i], cnte[liste[i]]));
 		sort(filtere.begin(), filtere.end());
 		for (int i = 0; i < filtere.size(); i++)
 			mpe[filtere[i]] = i + 2;
 	}
-	void filter(int _therK)
+	void filter()
 	{
-		therK = _therK;
 		filterV();
 		filterE();
 	}
+
+public:
+	const static int maxv = 1010;
+	const static int maxe = 5010;
+
+public:
+	int cntv[maxv], cnte[maxe];
+	int mpv[maxv], mpe[maxe];
+	vector<Vertex> vecv;
+	vector<Edge> vece;
+	vector<int> listv, liste;
+	vector<Node> filterv, filtere;
 };
 
-class Solver
+class GSPAN
 {
 public:
-	const static int maxGraph = 10010;
-	const static int therK = 1; //
-
-	InputFilter inputfilter;
-	Graph graph[maxGraph]; // 0 to cntGraph-1
-	int cntGraph;
-
+	GSPAN() {}
 	void init()
 	{
 		cntGraph = 0;
 		for (int i = 0; i < maxGraph; i++)
 			graph[i] = Graph();
-		inputfilter.init();
 	}
-	void execInputGraph(int n)
+	void input(const vector<string> &inputStr, int _therK)
 	{
-		inputfilter.filter(therK);
-		//
+		therK = _therK;
+	}
 
-		inputfilter.init();
+public:
+	const static int maxGraph = 10010;
+
+public:
+	double minSup; // minimum support
+	int minSupDeg; // minSup*cntGraph
+
+	Graph graph[maxGraph]; // 0 to cntGraph-1
+	int cntGraph;
+};
+
+class Solver
+{
+public:
+	void init()
+	{
+		inputFilter.init();
+		inputStr.clear();
+		gspan.init();
 	}
 	void input()
 	{
@@ -211,25 +224,26 @@ public:
 		int n, m, p, q, l;
 		while (gets(buff))
 		{
+			inputStr.pb(buff);
 			if (strcmp(buff, "t # -1") == 0) break;
 			if (buff[0] == 't')
 			{
-				execInputGraph(n);
-				sscanf(buff, "t # %d", &n);
-				cntGraph++;
+				// sscanf(buff, "t # %d", &n);
+				// cntGraph++;
 			}
 			else if (buff[0] == 'v')
 			{
 				sscanf(buff, "v %d %d", &m, &l);
-				inputfilter.addv(m, l);
+				inputFilter.addv(m, l);
 			}
 			else if (buff[0] == 'e')
 			{
 				sscanf(buff, "e %d %d %d", &p, &q, &l);
-				inputfilter.adde(p, q, l);
+				inputFilter.adde(p, q, l);
 			}
 			else puts("Error!");
 		}
+		gspan.input(inputStr, therK);
 	}
 	void debug()
 	{
@@ -245,6 +259,14 @@ public:
 	{
 		debug();
 	}
+
+public:
+	const static double minSup = 0.5; // minimum support
+
+public:
+	InputFilter inputFilter;
+	vector<string> inputStr;
+	GSPAN gspan;
 };
 
 Solver solver;
