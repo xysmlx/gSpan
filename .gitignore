@@ -1,2 +1,8 @@
+# ignore files
 *.exe
 *.[oa]
+*.sdf
+
+# ignore directories
+VSProject/gSpan/Debug
+VSProject/gSpan/gSpan/Debug
