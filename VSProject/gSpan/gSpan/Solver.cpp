@@ -3,7 +3,6 @@
 void Solver::init()
 {
 	inputFilter.init();
-	inputStr.clear();
 	gspan.init();
 }
 void Solver::input()
@@ -12,7 +11,7 @@ void Solver::input()
 	int m, p, q, l;
 	while (gets_s(buff))
 	{
-		inputStr.pb(buff);
+		inputFilter.inputStr.push_back(buff);
 		if (strcmp(buff, "t # -1") == 0) break;
 		if (buff[0] == 't')
 		{
@@ -31,7 +30,7 @@ void Solver::input()
 		}
 		else puts("Error!");
 	}
-	gspan.input(inputStr, minSup);
+	gspan.input(inputFilter, minSup);
 }
 void Solver::debug()
 {

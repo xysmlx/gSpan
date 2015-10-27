@@ -30,9 +30,6 @@
     <ClInclude Include="Edge.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DFSCodeNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputFilter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -40,6 +37,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Solver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DFSCode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

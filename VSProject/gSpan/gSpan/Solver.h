@@ -19,7 +19,6 @@ public:
 
 public:
 	InputFilter inputFilter;
-	vector<string> inputStr;
 	GSPAN gspan;
 };
 
