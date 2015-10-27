@@ -20,8 +20,6 @@ public:
 public:
 	InputFilter inputFilter;
 	GSPAN gspan;
-	
-	int stTime,edTime;
 };
 
 #endif

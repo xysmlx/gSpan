@@ -34,7 +34,7 @@ void GSPAN::input(const InputFilter &inputFilter, double _minSup)
 		else puts("Error!");
 	}
 
-	minSupDeg = floor(minSup*cntGraph);
+	minSupDeg = minSup*cntGraph;
 }
 
 void GSPAN::GenSeedSet()

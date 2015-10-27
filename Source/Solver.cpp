@@ -30,7 +30,6 @@ void Solver::input()
 		}
 		else puts("Error!");
 	}
-	stTime=clock();
 	gspan.input(inputFilter, minSup);
 }
 void Solver::debug()
@@ -44,6 +43,4 @@ void Solver::solve()
 void Solver::output()
 {
 	debug();
-	edTime=clock();
-	cout<<(edTime-stTime) / (CLOCKS_PER_SEC/1000.0)<<endl;
 }

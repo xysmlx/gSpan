@@ -3,6 +3,8 @@
 *.[oa]
 *.sdf
 *.opensdf
+*.obj
+.DS_Store
 
 # ignore directories
 VSProject/gSpan/Debug

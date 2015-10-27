@@ -7,7 +7,9 @@ struct Vertex
 {
 	int id;
 	int label;
-	Vertex(int _id = 0, int _label = 0): id(_id), label(_label) {}
+	bool del;
+
+	Vertex(int _id = 0, int _label = 0) : id(_id), label(_label), del(0) {}
 	~Vertex() {}
 };
 
