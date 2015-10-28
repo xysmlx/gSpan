@@ -1,9 +1,34 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include "firsthead.h"
-#include "Vertex.h"
-#include "Edge.h"
+#include "head.h"
+
+struct Vertex
+{
+	int id;
+	int label;
+	bool del;
+
+	Vertex(int _id = 0, int _label = 0) : id(_id), label(_label), del(0) {}
+	~Vertex() {}
+};
+
+struct Edge
+{
+	int u;
+	int v;
+	int label;
+	int next;
+	bool del;
+
+	Edge(int _u = 0, int _v = 0, int _label = 0, int _next = -1) : u(_u), v(_v), label(_label), next(_next), del(0) {}
+	~Edge() {}
+
+	bool operator == (const Edge &o) const
+	{
+		return u == o.u&&v == o.v&&label == o.label;
+	}
+};
 
 class Graph
 {

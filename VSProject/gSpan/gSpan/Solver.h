@@ -1,7 +1,7 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
-#include "firsthead.h"
+#include "head.h"
 #include "InputFilter.h"
 #include "GSPAN.h"
 

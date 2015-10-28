@@ -144,14 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="DFSCode.h" />
-    <ClInclude Include="Edge.h" />
-    <ClInclude Include="firsthead.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GSPAN.h" />
     <ClInclude Include="head.h" />
     <ClInclude Include="InputFilter.h" />
     <ClInclude Include="Solver.h" />
-    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DFSCode.cpp" />

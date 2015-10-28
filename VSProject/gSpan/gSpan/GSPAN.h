@@ -1,7 +1,7 @@
 #ifndef GSPAN_H
 #define GSPAN_H
 
-#include "firsthead.h"
+#include "head.h"
 #include "InputFilter.h"
 #include "Graph.h"
 #include "DFSCode.h"

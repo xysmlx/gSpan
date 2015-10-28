@@ -1,4 +1,4 @@
-#include "firsthead.h"
+#include "head.h"
 #include "Solver.h"
 
 Solver solver;

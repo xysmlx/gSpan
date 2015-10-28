@@ -1,7 +1,7 @@
 #ifndef DFSCODENODE_H
 #define DFSCODENODE_H
 
-#include "firsthead.h"
+#include "head.h"
 #include "Graph.h"
 
 struct DFSCodeNode

@@ -1,9 +1,8 @@
 #ifndef INPUTFILTER_H
 #define INPUTFILTER_H
 
-#include "firsthead.h"
-#include "Vertex.h"
-#include "Edge.h"
+#include "head.h"
+#include "Graph.h"
 
 class InputFilter
 {
