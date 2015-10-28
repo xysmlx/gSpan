@@ -1,0 +1,120 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+\usepackage{ctex}
+\usepackage[colorlinks,bookmarksnumbered=true,bookmarksopen=true,CJKbookmarks=true,linkcolor=red,anchorcolor=black,citecolor=black]{hyperref}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{ccmap}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{bbding}
+\usepackage{url}
+\usepackage{movie15}
+\usepackage{booktabs,longtable}
+\usepackage{mdwlist}
+\usepackage{subfigure}
+\usepackage{pifont}
+\usepackage{titlesec}
+\usepackage[labelsep=space]{caption}
+\usepackage{multirow,paralist}
+\usepackage[title,titletoc]{appendix}
+\usepackage[svgnames,x11names]{xcolor}
+\usepackage[titles,subfigure]{tocloft}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+%\renewcommand{\headrulewidth}{1pt}  %页眉线宽，设为0可以去页眉线
+\lhead{\small{gSpan实验报告}}
+\chead{}
+\rhead{\small{马凌霄(1501111302)}}
+\lfoot{}
+\cfoot{}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+
+  \def\CU@definezihao#1#2#3{
+  \def#1{\fontsize{#2}{#3}\selectfont}}
+
+\CU@definezihao{\zihaochu}{42}{50}
+\CU@definezihao{\zihaoxiaochu}{36}{44}
+\CU@definezihao{\zihaoyi}{28}{34}
+\CU@definezihao{\zihaoer}{22}{26}
+\CU@definezihao{\zihaoxiaoer}{18}{22}
+\CU@definezihao{\zihaosan}{15.7}{19}
+\CU@definezihao{\zihaosi}{14}{17}
+\CU@definezihao{\zihaoxiaosi}{12}{14}
+\CU@definezihao{\zihaowu}{10.5}{12}
+\CU@definezihao{\zihaoxiaowu}{9}{11}
+\CU@definezihao{\zihaoliu}{7.875}{9}
+\CU@definezihao{\zihaoqi}{5.25}{6}
+
+\titleformat{\section}{\zihaosi\bfseries}{$\S\;$\thesection}{1em}{}
+\titleformat{\subsection}{\zihaoxiaosi\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\zihaoxiaosi\bfseries}{\thesubsubsection}{1em}{}
+
+%\renewcommand{\figurename}{\zihaowu{Figure}}
+
+\makeatletter
+  \newcommand\figcaption{\def\@captype{figure}\caption}
+  \newcommand\tabcaption{\def\@captype{table}\caption}
+\makeatother
+
+\usepackage{listings}
+\lstset{tabsize=4, %
+  frame=single, %把代码用带有阴影的框圈起来
+  keywordstyle=\color[rgb]{0,0,1},
+  commentstyle=\color[rgb]{0.133,0.545,0.133},
+  stringstyle=\color[rgb]{0.627,0.126,0.941},
+  %commentstyle=\color{red!50!green!50!blue!50},% 浅灰色的注释
+  rulesepcolor=\color{red!20!green!20!blue!20},% 代码块边框为淡青色
+  %keywordstyle=\color{blue!90}\bfseries, %代码关键字的颜色为蓝色，粗体
+  showstringspaces=false,% 不显示代码字符串中间的空格标记
+  stringstyle=\ttfamily, % 代码字符串的特殊格式
+  keepspaces=true, %
+  breakindent=22pt, %
+  numbers=left,%左侧显示行号
+  stepnumber=1,%
+  numberstyle=\footnotesize, %行号字体用小号
+  basicstyle=\footnotesize, %
+  showspaces=false, %
+  flexiblecolumns=true, %
+  breaklines=true, % 对过长的代码自动换行
+  breakautoindent=true,%
+  breakindent=4em, %
+  escapebegin=\begin{CJK*}{GBK}{hei},escapeend=\end{CJK*},
+  aboveskip=1em, %代码块边框
+  %% added by http://bbs.ctex.org/viewthread.php?tid=53451
+  fontadjust,
+  captionpos=t,
+  framextopmargin=2pt,framexbottommargin=2pt,abovecaptionskip=-3pt,belowcaptionskip=3pt,
+  xleftmargin=4em,xrightmargin=4em, % 设定listing左右的空白
+  texcl=true,
+  % 设定中文冲突，断行，列模式，数学环境输入，listing 数字的样式
+  extendedchars=false,columns=flexible,mathescape=true
+  % numbersep=-1em
+}
+\renewcommand{\figurename}{\zihaowu{图}}
+\renewcommand{\tablename}{\zihaowu{表}}
+\renewcommand{\abstractname}{\zihaoxiaosi{摘 \qquad 要}}
+\renewcommand{\contentsname}{\centerline{\Large 目 \qquad 录}}
+\renewcommand{\refname}{\centerline{\Large 参考文献}}
+%\pagestyle{headings}
+\begin{document}
+\title{gSpan实验报告}
+\author{海量图数据的管理和挖掘}
+\date{\today}
+\maketitle
+\ \\
+\noindent\textbf{
+作者：马凌霄\\
+学号：1501111302\\
+院系：信息科学技术学院\\
+EMail：xysmlx@gmail.com\\
+Private Repository: \url{https://bitbucket.org/xysmlx/gspan}
+}
+\newpage
+\tableofcontents
+\newpage
+aaa
+
+\end{document}
