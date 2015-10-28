@@ -59,5 +59,8 @@
     <ClCompile Include="Solver.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="DFSCode.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

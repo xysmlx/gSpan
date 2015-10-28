@@ -1,6 +1,8 @@
 #ifndef FIRSTHEAD_H
 #define FIRSTHEAD_H
 
+//#define xysmlx
+
 #include <cstdio>
 #include <iostream>
 #include <cstring>
@@ -16,6 +18,7 @@
 #include <ctime>
 #include <stack>
 #include <ctime>
+#include <fstream>
 #include <algorithm>
 #include <functional>
 using namespace std;

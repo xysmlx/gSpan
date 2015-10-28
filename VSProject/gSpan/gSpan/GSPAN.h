@@ -4,6 +4,7 @@
 #include "firsthead.h"
 #include "InputFilter.h"
 #include "Graph.h"
+#include "DFSCode.h"
 
 class GSPAN
 {
@@ -12,6 +13,7 @@ public:
 	{
 		bool operator ()(const Edge &o1, const Edge &o2) const
 		{
+			if (o1.u == o2.u&&o1.v == o2.v) return o1.label < o2.label;
 			if (o1.u == o2.u) return o1.v < o2.v;
 			return o1.u < o2.u;
 		}
@@ -39,6 +41,8 @@ public:
 	void init();
 	void input(const InputFilter &_inputFilter, double _minSup); // Build relabeled graph
 	void GenSeedSet(); // Generate the seed edge set
+	void NextDFSCode(const DFSCode &dfsCode); // Find the next dfscode and update the rightpath
+	bool PatternInGraph(const Graph &graph, const DFSCode &dfscode); // Is this pattern in this graph?
 	void SubMining(); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
 
@@ -46,6 +50,8 @@ public:
 	const static int maxGraph = 10010; // Maximum graph number of graph set
 
 public:
+	ofstream out;
+
 	double minSup; // minimum support
 	int minSupDeg; // minSup * cntGraph
 

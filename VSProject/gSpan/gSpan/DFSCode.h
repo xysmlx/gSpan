@@ -2,6 +2,7 @@
 #define DFSCODENODE_H
 
 #include "firsthead.h"
+#include "Graph.h"
 
 struct DFSCodeNode
 {
@@ -37,15 +38,13 @@ struct DFSCodeNode
 	}
 };
 
-struct DFSCode
+class DFSCode
 {
-	void init()
+public:
+	DFSCode()
 	{
 		dfsCodeList.clear();
-	}
-	void Convert2Graph()
-	{
-		//
+		rightPath.clear();
 	}
 	bool operator < (const DFSCode &o) const
 	{
@@ -55,7 +54,16 @@ struct DFSCode
 		return dfsCodeList.size() < o.dfsCodeList.size();
 	}
 
+public:
+	void init();
+	Graph Convert2Graph();
+	void GenAllDFSCode(const Graph &g, DFSCode &ret);
+	DFSCode FindMinDFSCode();
+	bool isMinDFSCode();
+
+public:
 	vector<DFSCodeNode> dfsCodeList;
+	vector<int> rightPath;
 };
 
 #endif

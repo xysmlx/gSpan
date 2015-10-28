@@ -5,7 +5,7 @@ Solver solver;
 
 void init()
 {
-	solver.init();
+	solver.init("in.txt", 0.5);
 }
 void input()
 {
@@ -22,13 +22,11 @@ void output()
 
 int main()
 {
-#ifdef xysmlx
-	freopen("in.txt", "r", stdin);
-#endif
-
 	init();
 	input();
 	solve();
 	output();
+
+	//getchar();
 	return 0;
 }
