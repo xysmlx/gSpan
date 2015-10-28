@@ -7,9 +7,10 @@ struct Vertex
 {
 	int id;
 	int label;
+	int seq;
 	bool del;
 
-	Vertex(int _id = 0, int _label = 0) : id(_id), label(_label), del(0) {}
+	Vertex(int _id = 0, int _label = 0) : id(_id), label(_label), seq(-1), del(0) {}
 	~Vertex() {}
 };
 
@@ -45,6 +46,8 @@ public:
 	void addv(int id, int label);
 	void addse(int u, int v, int label);
 	void adde(int u, int v, int label);
+	void delse(int u, int v, int label);
+	void dele(int u, int v, int label);
 
 public:
 	const static int maxv = 1010;

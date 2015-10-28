@@ -41,9 +41,15 @@ public:
 	void init();
 	void input(const InputFilter &_inputFilter, double _minSup); // Build relabeled graph
 	void GenSeedSet(); // Generate the seed edge set
+	void GSPAN::DeleteEdgeFlag(const Edge &e); // Label deleted edge
+	void DeleteEdge(const Edge &e); // Delete edge from graph
+	void DeleteUnFreqEdge(); // Delete unfreq edge
+	void RebuildGraph(int id); // Rebuild graph with id
 	void NextDFSCode(const DFSCode &dfsCode); // Find the next dfscode and update the rightpath
-	bool PatternInGraph(const Graph &graph, const DFSCode &dfscode); // Is this pattern in this graph?
-	void SubMining(); // Sub-Mining Procedure
+	bool JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now); // DFS
+	bool isPatternInGraph(Graph graph, const DFSCode &dfscode); // Is this pattern in this graph?
+	bool isFreqPattern(const DFSCode &dfscode); // Is dfscode a freq pattern?
+	void SubMining(const Edge &base); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
 
 public:
@@ -62,6 +68,7 @@ public:
 	set<Edge, EdgeCMP> freqEdgeVis; // Visit or not in a graph
 
 	vector<Edge> freqEdge; // Freq edge set
+	vector<Edge> unFreqEdge; // Unfreq edge set
 };
 
 #endif

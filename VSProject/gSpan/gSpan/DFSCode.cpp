@@ -31,16 +31,20 @@ Graph DFSCode::Convert2Graph()
 	return graph;
 }
 
-void DFSCode::GenAllDFSCode(const Graph &g, DFSCode &ret)
+void DFSCode::GenAllDFSCode(const Graph &g, DFSCode &ret, DFSCode now)
 {
-	//
+	if (now.rightPath.size() == 0)
+	{
+		//
+	}
 }
 
 DFSCode DFSCode::FindMinDFSCode()
 {
 	Graph graph = Convert2Graph();
 	DFSCode ret = *this;
-	GenAllDFSCode(graph, ret);
+	DFSCode tmp = DFSCode();
+	GenAllDFSCode(graph, ret, tmp);
 	return ret;
 }
 

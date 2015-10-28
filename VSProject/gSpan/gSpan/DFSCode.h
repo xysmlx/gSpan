@@ -57,7 +57,7 @@ public:
 public:
 	void init();
 	Graph Convert2Graph();
-	void GenAllDFSCode(const Graph &g, DFSCode &ret);
+	void GenAllDFSCode(const Graph &g, DFSCode &ret, DFSCode now);
 	DFSCode FindMinDFSCode();
 	bool isMinDFSCode();
 
