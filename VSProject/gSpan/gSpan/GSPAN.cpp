@@ -121,11 +121,6 @@ void GSPAN::DeleteUnFreqEdge()
 		RebuildGraph(i);
 }
 
-void GSPAN::NextDFSCode(const DFSCode &dfsCode)
-{
-	//
-}
-
 bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now)
 {
 	if (ith == (int)dfscode.dfsCodeList.size()) return 1;
@@ -172,9 +167,18 @@ bool GSPAN::isFreqPattern(const DFSCode &dfscode)
 	return cnt >= minSupDeg;
 }
 
-void GSPAN::SubMining(const Edge &base)
+void GSPAN::BuildPattern(DFSCode &dfscode)
 {
 	//
+}
+
+void GSPAN::SubMining(const Edge &base)
+{
+	DFSCode dfscode;
+	dfscode.dfsCodeList.push_back(DFSCodeNode(0, 1, base.u, base.label, base.v));
+	dfscode.rightPath.push_back(0);
+	dfscode.rightPath.push_back(1);
+	BuildPattern(dfscode);
 }
 
 void GSPAN::gSpan()

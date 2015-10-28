@@ -6,6 +6,12 @@
 *.obj
 .DS_Store
 
+Report/*.log
+Report/*.aux
+Report/*.synctex
+Report/*.toc
+Report/*.out
+
 # ignore directories
 VSProject/gSpan/Debug
 VSProject/gSpan/gSpan/Debug

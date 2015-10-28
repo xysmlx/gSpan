@@ -1,4 +1,4 @@
-OBJS = main.o Solver.o GSPAN.o InputFilter.o Graph.o
+OBJS = main.o Solver.o GSPAN.o InputFilter.o Graph.o DFSCode.o
 CC = g++
 CFLAGS = -std=c++11 -Wall -Dxysmlx -O2 -g
 
