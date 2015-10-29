@@ -11,7 +11,7 @@ void Solver::input()
 {
 	string buff;
 	int m, p, q, l;
-	ifstream in = ifstream(inputPath);
+	ifstream in(inputPath);
 	while (getline(in, buff))
 	{
 		inputFilter.inputStr.push_back(buff);
@@ -49,5 +49,5 @@ void Solver::output()
 {
 	//debug();
 	edTime = clock();
-	cout << "Running Time: " << (double)(edTime - stTime) / (CLOCKS_PER_SEC / 1000.0) << endl;
+	cout << "Running Time: " << (double)(edTime - stTime) / (CLOCKS_PER_SEC / 1000.0) << "ms" << endl;
 }

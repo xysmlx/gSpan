@@ -41,7 +41,7 @@ public:
 	void init();
 	void input(const InputFilter &_inputFilter, double _minSup); // Build relabeled graph
 	void GenSeedSet(); // Generate the seed edge set
-	void GSPAN::DeleteEdgeFlag(const Edge &e); // Label deleted edge
+	void DeleteEdgeFlag(const Edge &e); // Label deleted edge
 	void DeleteEdge(const Edge &e); // Delete edge from graph
 	void DeleteUnFreqEdge(); // Delete unfreq edge
 	void RebuildGraph(int id); // Rebuild graph with id

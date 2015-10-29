@@ -8,7 +8,7 @@ void GSPAN::init()
 	freqEdge.clear();
 	freqEdgeCnt.clear();
 	unFreqEdge.clear();
-	out = ofstream("out.txt");
+	out.open("out.txt", ios::out);
 }
 
 void GSPAN::input(const InputFilter &inputFilter, double _minSup)
@@ -187,6 +187,7 @@ void GSPAN::gSpan()
 	DeleteUnFreqEdge();
 	for (int i = 0;i < (int)freqEdge.size();i++)
 	{
+		cout<<"freqEdge: "<<i<<endl;
 		SubMining(freqEdge[i]);
 		DeleteEdge(freqEdge[i]);
 	}
