@@ -167,9 +167,34 @@ bool GSPAN::isFreqPattern(const DFSCode &dfscode)
 	return cnt >= minSupDeg;
 }
 
-void GSPAN::BuildPattern(DFSCode &dfscode)
+void GSPAN::BuildPattern(DFSCode &dfscode, int loc, int backloc, int loclabel, int maxseq)
 {
-	//
+	if (backloc == -1) //Generate forward edge
+	{
+		for (int i = 0;i < (int)freqEdge.size();i++)
+		{
+			int v = dfscode.rightPath[loc];
+			Edge e = freqEdge[i];
+			if (e.u != loclabel&&e.v != loclabel) continue;
+			if (e.u != loclabel) swap(e.u, e.v);
+			dfscode.dfsCodeList.push_back(DFSCodeNode(loc, maxseq + 1, e.u, e.label, e.v));
+			dfscode.rightPath.push_back(maxseq + 1);
+			// Test for the new dfscode
+			if (!dfscode.isMinDFSCode() || !isFreqPattern(dfscode)) // No
+			{
+				dfscode.dfsCodeList.pop_back();
+				dfscode.rightPath.pop_back();
+			}
+			else // Yes
+			{
+				//
+			}
+		}
+	}
+	else //Generate backware edge
+	{
+		//
+	}
 }
 
 void GSPAN::SubMining(const Edge &base)
@@ -178,7 +203,7 @@ void GSPAN::SubMining(const Edge &base)
 	dfscode.dfsCodeList.push_back(DFSCodeNode(0, 1, base.u, base.label, base.v));
 	dfscode.rightPath.push_back(0);
 	dfscode.rightPath.push_back(1);
-	BuildPattern(dfscode);
+	BuildPattern(dfscode, 1, -1, base.v, 1);
 }
 
 void GSPAN::gSpan()
@@ -187,7 +212,7 @@ void GSPAN::gSpan()
 	DeleteUnFreqEdge();
 	for (int i = 0;i < (int)freqEdge.size();i++)
 	{
-		cout<<"freqEdge: "<<i<<endl;
+		cout << "freqEdge: " << i << endl;
 		SubMining(freqEdge[i]);
 		DeleteEdge(freqEdge[i]);
 	}

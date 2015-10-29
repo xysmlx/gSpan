@@ -5,7 +5,7 @@ Solver solver;
 
 void init()
 {
-	solver.init("graph.data", 0.5);
+	solver.init("in.txt", 0.5);
 }
 void input()
 {

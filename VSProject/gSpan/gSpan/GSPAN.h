@@ -45,10 +45,10 @@ public:
 	void DeleteEdge(const Edge &e); // Delete edge from graph
 	void DeleteUnFreqEdge(); // Delete unfreq edge
 	void RebuildGraph(int id); // Rebuild graph with id
-	bool JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now); // DFS
+	bool JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now); // DFS, ith = dfscode.dfsCodeList[ith], now = now vertex
 	bool isPatternInGraph(Graph graph, const DFSCode &dfscode); // Is this pattern in this graph?
 	bool isFreqPattern(const DFSCode &dfscode); // Is dfscode a freq pattern?
-	void BuildPattern(DFSCode &dfscode); // DFS build pattern and test
+	void BuildPattern(DFSCode &dfscode, int loc, int backloc, int loclabel, int maxseq); // DFS build pattern and test, loc = now extend location in rightpath, backloc = -1(forward) or backward location in rightpath, loclabel = loc vertex label, maxseq = max sequence id
 	void SubMining(const Edge &base); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
 
