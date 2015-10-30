@@ -47,8 +47,9 @@ public:
 	void RebuildGraph(int id); // Rebuild graph with id
 	bool JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now); // DFS, ith = dfscode.dfsCodeList[ith], now = now vertex
 	bool isPatternInGraph(Graph graph, const DFSCode &dfscode); // Is this pattern in this graph?
+	void SolveFreqPattern(const DFSCode &dfscode); // Work when dfscode is freq pattern
 	bool isFreqPattern(const DFSCode &dfscode); // Is dfscode a freq pattern?
-	void BuildPattern(DFSCode &dfscode, int loc, int backloc, int loclabel, int maxseq); // DFS build pattern and test, loc = now extend location in rightpath, backloc = -1(forward) or backward location in rightpath, loclabel = loc vertex label, maxseq = max sequence id
+	void BuildPattern(DFSCode &dfscode, int loc, int backloc, int maxseq); // DFS build pattern and test, loc = now extend location in rightpath, backloc = -1(forward) or backward location in rightpath, maxseq = max sequence id
 	void SubMining(const Edge &base); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
 
@@ -56,7 +57,10 @@ public:
 	const static int maxGraph = 10010; // Maximum graph number of graph set
 
 public:
-	ofstream out;
+	ofstream out; // Output to file
+	DFSCode tmpDFSCode; // Temp dfscode
+
+	int cntFreqPattern; // Number of freq pattern
 
 	double minSup; // minimum support
 	int minSupDeg; // minSup * cntGraph

@@ -8,6 +8,7 @@ void GSPAN::init()
 	freqEdge.clear();
 	freqEdgeCnt.clear();
 	unFreqEdge.clear();
+	cntFreqPattern = 0;
 	out.open("out.txt", ios::out);
 }
 
@@ -38,7 +39,7 @@ void GSPAN::input(const InputFilter &inputFilter, double _minSup)
 		else puts("Error!");
 	}
 	minSupDeg = (int)ceil(minSup*cntGraph);
-	minSupDeg = 3; // For test
+	//minSupDeg = 3; // For test
 }
 
 void GSPAN::GenSeedSet()
@@ -123,8 +124,9 @@ void GSPAN::DeleteUnFreqEdge()
 
 bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now)
 {
+	cout << "now: " << now << " " << graph.vtx[now].label << " " << graph.vtx[now].seq << endl;
 	if (ith == (int)dfscode.dfsCodeList.size()) return 1;
-	if (now == -1)
+	if (now == -1) // From initial vertex
 	{
 		for (int i = 0;i < graph.vn;i++)
 		{
@@ -135,85 +137,261 @@ bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, i
 				graph.vtx[i].seq = -1;
 			}
 		}
+		return 0;
 	}
-	for (int i = graph.head[now];~i;i++)
+
+	if (dfscode.dfsCodeList[ith].isBackward()) // Backward
 	{
-		Edge e = graph.edge[i];
-		if (e.label == dfscode.dfsCodeList[ith].lab&&
-			graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb)
+		for (int i = graph.head[now];~i;i = graph.edge[i].next)
 		{
-			if (dfscode.dfsCodeList[ith].b < dfscode.dfsCodeList[ith].a&&
-				graph.vtx[e.v].seq != dfscode.dfsCodeList[ith].b)
-				continue;
-			int t = graph.vtx[e.v].seq;
-			graph.vtx[e.v].seq = dfscode.dfsCodeList[ith].b;
-			if (JudgePatternInGraph(graph, dfscode, ith + 1, e.v)) return 1;
-			graph.vtx[e.v].seq = t;
+			Edge e = graph.edge[i];
+			if (e.label == dfscode.dfsCodeList[ith].lab&&
+				graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
+				graph.vtx[e.v].seq == dfscode.dfsCodeList[ith].b)
+			{
+				if (JudgePatternInGraph(graph, dfscode, ith + 1, now)) return 1;
+			}
+		}
+		return 0;
+	}
+	else // Forward
+	{
+		for (int i = graph.head[now];~i;i = graph.edge[i].next)
+		{
+			Edge e = graph.edge[i];
+			if (e.label == dfscode.dfsCodeList[ith].lab&&
+				graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
+				graph.vtx[e.v].seq == -1)
+			{
+				graph.vtx[e.v].seq = dfscode.dfsCodeList[ith].b;
+				if (JudgePatternInGraph(graph, dfscode, ith + 1, e.v)) return 1;
+				graph.vtx[e.v].seq = -1;
+			}
 		}
 	}
+
 	return 0;
 }
+
+//bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now)
+//{
+//	cout << "now: " << now << " " << graph.vtx[now].label << " " << graph.vtx[now].seq << endl;
+//	if (ith == (int)dfscode.dfsCodeList.size()) return 1;
+//	if (now == -1) // From initial vertex
+//	{
+//		for (int i = 0;i < graph.vn;i++)
+//		{
+//			if (graph.vtx[i].label == dfscode.dfsCodeList[ith].la)
+//			{
+//				graph.vtx[i].seq = dfscode.dfsCodeList[ith].a;
+//				if (JudgePatternInGraph(graph, dfscode, ith, i)) return 1;
+//				graph.vtx[i].seq = -1;
+//			}
+//		}
+//		return 0;
+//	}
+//
+//	if (dfscode.dfsCodeList[ith].isBackward()) // Backward
+//	{
+//		for (int i = graph.head[now];~i;i = graph.edge[i].next)
+//		{
+//			Edge e = graph.edge[i];
+//			if (e.label == dfscode.dfsCodeList[ith].lab&&
+//				graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
+//				graph.vtx[e.v].seq == dfscode.dfsCodeList[ith].b)
+//			{
+//				if (JudgePatternInGraph(graph, dfscode, ith + 1, now)) return 1;
+//			}
+//		}
+//		return 0;
+//	}
+//	else // Forward
+//	{
+//		for (int i = graph.head[now];~i;i = graph.edge[i].next)
+//		{
+//			Edge e = graph.edge[i];
+//			if (e.label == dfscode.dfsCodeList[ith].lab&&
+//				graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
+//				graph.vtx[e.v].seq == -1)
+//			{
+//				graph.vtx[e.v].seq = dfscode.dfsCodeList[ith].b;
+//				if (JudgePatternInGraph(graph, dfscode, ith + 1, e.v)) return 1;
+//				graph.vtx[e.v].seq = -1;
+//			}
+//		}
+//	}
+//
+//	return 0;
+//}
 
 bool GSPAN::isPatternInGraph(Graph graph, const DFSCode &dfscode)
 {
 	return JudgePatternInGraph(graph, dfscode, 0, -1);
 }
 
+void GSPAN::SolveFreqPattern(const DFSCode &dfscode)
+{
+	out << "Pattern #" << cntFreqPattern++ << ": " << endl;
+	for (int i = 0;i < (int)dfscode.dfsCodeList.size();i++)
+	{
+		DFSCodeNode t = dfscode.dfsCodeList[i];
+		out << t.a << " " << t.b << " " << t.la << " " << t.lab << " " << t.lb << endl;
+	}
+}
+
 bool GSPAN::isFreqPattern(const DFSCode &dfscode)
 {
+	puts("isFreqPattern?");
 	int cnt = 0;
 	for (int i = 0;i < cntGraph;i++)
 		if (isPatternInGraph(graph[i], dfscode)) cnt++;
-	return cnt >= minSupDeg;
+	DFSCode t = dfscode;
+	t.output();
+	cout << "pattern cnt: " << cnt << endl;
+	if (cnt >= minSupDeg)
+	{
+		SolveFreqPattern(dfscode);
+		return 1;
+	}
+	return 0;
 }
 
-void GSPAN::BuildPattern(DFSCode &dfscode, int loc, int backloc, int loclabel, int maxseq)
+void GSPAN::BuildPattern(DFSCode &dfscode, int loc, int backloc, int maxseq)
 {
-	if (backloc == -1) //Generate forward edge
+	//dfscode.output();
+	if (backloc == -1) // Generate forward edge
 	{
+		puts("backloc == -1");
 		for (int i = 0;i < (int)freqEdge.size();i++)
 		{
-			int v = dfscode.rightPath[loc];
+			// Extend a new dfscodenode
+			pair<int, int> v = dfscode.rightPath[loc];
 			Edge e = freqEdge[i];
-			if (e.u != loclabel&&e.v != loclabel) continue;
-			if (e.u != loclabel) swap(e.u, e.v);
-			dfscode.dfsCodeList.push_back(DFSCodeNode(loc, maxseq + 1, e.u, e.label, e.v));
-			dfscode.rightPath.push_back(maxseq + 1);
-			// Test for the new dfscode
+			if (e.u != v.second&&e.v != v.second) continue;
+			if (e.u != v.second) swap(e.u, e.v);
+			dfscode.dfsCodeList.push_back(DFSCodeNode(v.first, maxseq + 1, e.u, e.label, e.v));
+			dfscode.rightPath.push_back(make_pair(maxseq + 1, e.v));
+
+			// Test the new dfscode
+			//cout << "Test the new dfscode" << endl;
+			//dfscode.output();
 			if (!dfscode.isMinDFSCode() || !isFreqPattern(dfscode)) // No
 			{
+				puts("No, cut.");
 				dfscode.dfsCodeList.pop_back();
 				dfscode.rightPath.pop_back();
+
+				// Backtrack in rightpath
+				if (dfscode.rightPath.size() == 1) return; // Cannot bactrack in rightpath
+				vector<pair<int, int> > t1;
+				t1.push_back(dfscode.rightPath[(int)dfscode.rightPath.size() - 1]);
+				dfscode.rightPath.pop_back();
+				for (int i = (int)dfscode.rightPath.size() - 1;i >= 0;i--) // Find a vertex to extend in rightpath
+				{
+					int cnt = 0;
+					for (int j = 0;j < (int)dfscode.dfsCodeList.size();j++)
+					{
+						DFSCodeNode t = dfscode.dfsCodeList[j];
+						if (t.a < t.b&&t.a == dfscode.rightPath[i].first)
+							cnt++;
+					}
+					if (cnt < 2) break;
+					t1.push_back(dfscode.rightPath[i]);
+					dfscode.rightPath.pop_back();
+				}
+				if (dfscode.rightPath.size()>0) // Can extend
+				{
+					BuildPattern(dfscode, (int)dfscode.rightPath.size() - 1, -1, maxseq);
+				}
+				// Recover
+				for (int i = (int)t1.size() - 1;i >= 0;i--)
+					dfscode.rightPath.push_back(t1[i]);
 			}
 			else // Yes
 			{
-				//
+				//puts("Yes, continue.");
+				if (dfscode.rightPath.size() < 3) // No backward edge to add, continue to add forward edge
+				{
+					BuildPattern(dfscode, (int)dfscode.rightPath.size() - 1, -1, maxseq + 1);
+				}
+				else // Continue to add backward edge
+				{
+					int t = (int)dfscode.rightPath.size();
+					BuildPattern(dfscode, t - 1, 0, maxseq);
+				}
+				// Recover
+				dfscode.dfsCodeList.pop_back();
+				dfscode.rightPath.pop_back();
 			}
 		}
 	}
-	else //Generate backware edge
+	else // Generate backware edge
 	{
-		//
+		puts("backloc >= 0");
+		for (int _ = 0;_ < (int)freqEdge.size();_++)
+		{
+			pair<int, int> u = dfscode.rightPath[loc];
+			pair<int, int> v = dfscode.rightPath[backloc];
+			Edge e = freqEdge[_];
+			if (e.u == v.second&&e.v == u.second) swap(e.u, e.v);
+			if (e.u == u.second&&e.v == v.second)
+			{
+				dfscode.dfsCodeList.push_back(DFSCodeNode(u.first, v.first, e.u, e.label, e.v));
+				// Test the new dfscode
+				if (!dfscode.isMinDFSCode() || !isFreqPattern(dfscode)) // No
+				{
+					dfscode.dfsCodeList.pop_back();
+					if (loc - backloc > 2)
+						BuildPattern(dfscode, loc, backloc + 1, maxseq);
+					else
+						BuildPattern(dfscode, loc, -1, maxseq);
+				}
+				else // Yes
+				{
+					if (loc - backloc > 2)
+						BuildPattern(dfscode, loc, backloc + 1, maxseq);
+					else
+						BuildPattern(dfscode, loc, -1, maxseq);
+					dfscode.dfsCodeList.pop_back();
+				}
+			}
+		}
 	}
 }
 
 void GSPAN::SubMining(const Edge &base)
 {
-	DFSCode dfscode;
-	dfscode.dfsCodeList.push_back(DFSCodeNode(0, 1, base.u, base.label, base.v));
-	dfscode.rightPath.push_back(0);
-	dfscode.rightPath.push_back(1);
-	BuildPattern(dfscode, 1, -1, base.v, 1);
+	tmpDFSCode.init();
+	tmpDFSCode.dfsCodeList.push_back(DFSCodeNode(0, 1, base.u, base.label, base.v));
+	SolveFreqPattern(tmpDFSCode);
+	//tmpDFSCode.output();
+	tmpDFSCode.rightPath.push_back(make_pair(0, base.u));
+	tmpDFSCode.rightPath.push_back(make_pair(1, base.v));
+	BuildPattern(tmpDFSCode, 1, -1, 1);
 }
 
 void GSPAN::gSpan()
 {
 	GenSeedSet();
 	DeleteUnFreqEdge();
+
+	puts("For debug ---");
+	DFSCode df;
+	df.dfsCodeList.push_back(DFSCodeNode(0, 1, 2, 3, 3));
+	df.dfsCodeList.push_back(DFSCodeNode(1, 2, 3, 2, 4));
+	df.dfsCodeList.push_back(DFSCodeNode(2, 0, 4, 4, 2));
+	df.dfsCodeList.push_back(DFSCodeNode(1, 3, 3, 2, 4));
+	//cout << JudgePatternInGraph(graph[0], df, 0, -1) << endl;
+	cout << JudgePatternInGraph(graph[1], df, 0, -1) << endl;
+	//cout << JudgePatternInGraph(graph[2], df, 0, -1) << endl;
+	//cout << JudgePatternInGraph(graph[3], df, 0, -1) << endl;
+	//cout << JudgePatternInGraph(graph[4], df, 0, -1) << endl;
+	puts("For debug ---");
 	for (int i = 0;i < (int)freqEdge.size();i++)
 	{
 		cout << "freqEdge: " << i << endl;
 		SubMining(freqEdge[i]);
 		DeleteEdge(freqEdge[i]);
 	}
+	out << "Number of Frequent Pattern: " << cntFreqPattern << endl;
 }

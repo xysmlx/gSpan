@@ -6,6 +6,17 @@ void DFSCode::init()
 	rightPath.clear();
 }
 
+void DFSCode::output()
+{
+	cout << "DFSCode::output: " << endl;
+	for (int i = 0;i < (int)dfsCodeList.size();i++)
+	{
+		DFSCodeNode t = dfsCodeList[i];
+		cout << t.a << " " << t.b << " " << t.la << " " << t.lab << " " << t.lb << endl;
+	}
+	cout << endl;
+}
+
 Graph DFSCode::Convert2Graph()
 {
 	bool vis[Graph::maxv];
@@ -31,12 +42,14 @@ Graph DFSCode::Convert2Graph()
 	return graph;
 }
 
-void DFSCode::GenMinDFSCode(Graph &g, DFSCode &ret, int now)
+bool DFSCode::GenMinDFSCode(Graph &g, DFSCode &ret, int now)
 {
-	//if (ret.dfsCodeList.size() > 0 && *this < ret) return;
-	if (ret.dfsCodeList.size() == (g.en / 2)) return;
+	//puts("GenMinDFSCode");
+	//ret.output();
+	if (ret.dfsCodeList.size() > 0 && *this < ret) return 1;
+	if ((int)ret.dfsCodeList.size() == (g.en / 2)) return 1;
 	// Find min forward edge
-	int nxt;
+	int nxt = -1;
 	DFSCodeNode sel;
 	DFSCodeNode tmp;
 	for (int i = g.head[now];~i;i = g.edge[i].next)
@@ -45,15 +58,21 @@ void DFSCode::GenMinDFSCode(Graph &g, DFSCode &ret, int now)
 		if (g.vtx[e.v].seq == -1)
 		{
 			if (sel.a == -1)
+			{
 				sel = DFSCodeNode(g.vtx[now].seq, g.vtx[now].seq + 1, g.vtx[now].label, e.label, g.vtx[e.v].label);
+				nxt = e.v;
+			}
 			tmp = DFSCodeNode(g.vtx[now].seq, g.vtx[now].seq + 1, g.vtx[now].label, e.label, g.vtx[e.v].label);
 			if (tmp < sel)
 			{
-				sel = min(sel, tmp);
+				sel = tmp;
 				nxt = e.v;
 			}
 		}
 	}
+	//cout << "nxt: " << nxt << endl;
+	if (nxt == -1) return 0;
+	assert(nxt != -1); // Bugs here
 	ret.dfsCodeList.push_back(sel);
 
 	// Insert backward edge
@@ -70,16 +89,19 @@ void DFSCode::GenMinDFSCode(Graph &g, DFSCode &ret, int now)
 		ret.dfsCodeList.push_back(back[i]);
 
 	// Continue
-	ret.rightPath.push_back(g.vtx[nxt].seq);
-	GenMinDFSCode(g, ret, nxt);
-	if (ret.dfsCodeList.size() == (g.en / 2)) return;
+	ret.rightPath.push_back(make_pair(g.vtx[nxt].seq, g.vtx[nxt].label));
+	bool tflag = GenMinDFSCode(g, ret, nxt);
+	if (tflag) return 1;
 
 	// Backtrack
 	ret.rightPath.pop_back();
+	return 0;
 }
 
 DFSCode DFSCode::FindMinDFSCode()
 {
+	//puts("FindMinDFSCode:");
+	//this->output();
 	Graph g = Convert2Graph();
 	DFSCode ret = *this;
 	DFSCode tmp;
@@ -90,21 +112,37 @@ DFSCode DFSCode::FindMinDFSCode()
 	for (int i = 0;i < g.vn;i++)
 		if (g.vtx[i].label == g.vtx[i].label)
 			st.push_back(i);
+	//cout << "st.size(): " << st.size() << endl;
 	for (int i = 0;i < (int)st.size(); i++)
 	{
+		//cout << "st[i]: " << i << endl;
 		for (int j = 0;j < g.vn;j++)
 			g.vtx[j].seq = -1;
 		tmp = DFSCode();
-		tmp.rightPath.push_back(0);
+		tmp.rightPath.push_back(make_pair(0, g.vtx[i].label));
 		g.vtx[i].seq = 0;
 		GenMinDFSCode(g, tmp, st[i]);
-		g.vtx[i].seq = -1;
-		ret = min(ret, tmp);
+		/*cout << "Compare begin:" << endl;
+		ret.output();
+		tmp.output();
+		cout << "Compare end:" << endl;*/
+		if (tmp.dfsCodeList.size() >= ret.dfsCodeList.size())
+		{
+			ret = min(ret, tmp);
+			//system("pause");
+		}
 	}
 	return ret;
 }
 
 bool DFSCode::isMinDFSCode()
 {
-	return FindMinDFSCode() < *this;
+	this->output();
+	if (FindMinDFSCode() == *this)
+	{
+		cout << "+++Mincode+++" << endl;
+		this->output();
+		cout << "---Mincode---" << endl;
+	}
+	return FindMinDFSCode() == *this;
 }

@@ -1,0 +1,1238 @@
+freqEdgeCnt Size: 9
+freqEdge Size: 3
+For debug ---
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+0
+For debug ---
+freqEdge: 0
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 3 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 3 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 4 2 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 0 3 1
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 3 2
+
+pattern cnt: 1
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+0 2 2 3 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+0 2 2 3 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 4 2 0
+now: 3 3 1
+now: 2 2 0
+now: 3 3 1
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 0 3 1
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+0 2 2 3 3
+
+pattern cnt: 0
+No, cut.
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+
+pattern cnt: 4
+backloc >= 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+
+pattern cnt: 4
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 4 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 2 2 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 4 2
+
+pattern cnt: 1
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: 4 2 0
+now: 3 3 1
+now: 6 4 2
+now: 1 4 2
+now: 1 4 2
+now: 2 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: 4 2 0
+now: 3 3 1
+now: 6 4 2
+now: 1 4 2
+now: 1 4 2
+now: 2 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 2 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 2 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 7 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 2 3
+
+pattern cnt: 2
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: 4 2 0
+now: 3 3 1
+now: 6 4 2
+now: 1 4 2
+now: 1 4 2
+now: 2 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: 4 2 0
+now: 3 3 1
+now: 6 4 2
+now: 1 4 2
+now: 1 4 2
+now: 2 2 0
+now: 3 3 1
+now: 6 4 2
+now: 6 4 2
+now: 1 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 2 4 2
+now: 2 4 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 1 3 1
+now: 4 4 2
+now: 4 4 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 2 3 1
+now: 3 4 2
+now: 3 4 2
+now: 0 3 1
+now: 3 4 2
+now: 3 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+No, cut.
+freqEdge: 1
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 4 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 2 2 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 2 4 1
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 4 2
+
+pattern cnt: 1
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+0 2 2 3 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+0 2 2 3 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 4 2 0
+now: 1 4 1
+now: 2 2 0
+now: 6 4 1
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 2 4 1
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+0 2 2 3 3
+
+pattern cnt: 0
+No, cut.
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+
+pattern cnt: 4
+backloc >= 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 0 3 3 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 0 3 3 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 0 3 3 2
+
+pattern cnt: 0
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 3 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 3 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 3 2
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 2 4
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 2 4
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 1 4 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 2
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: 0 4 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 2 4
+
+pattern cnt: 3
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+No, cut.
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 5 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: 4 2 0
+now: 1 4 1
+now: 3 3 2
+now: 0 3 2
+now: 2 2 0
+now: 6 4 1
+now: 7 3 2
+now: 3 3 2
+now: -1 -1 5
+now: 3 2 0
+now: 4 4 1
+now: 1 3 2
+now: 2 4 1
+now: 1 3 2
+now: 0 2 0
+now: -1 -1 6
+now: 5 2 0
+now: 2 2 0
+now: 4 4 1
+now: 1 3 2
+now: -1 -1 4
+now: 1 2 0
+now: 3 4 1
+now: 0 3 2
+now: 2 3 2
+now: -1 -1 6
+now: 5 2 0
+now: 4 2 0
+now: 3 2 0
+now: 2 2 0
+now: 1 2 0
+now: 0 2 0
+now: -1 -1 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
+pattern cnt: 0
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+No, cut.
+freqEdge: 2
+backloc == -1
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 4 2
+
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 3 2 4
+0 2 3 3 2
+
+No, cut.
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 2 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 2 3
+
+---Mincode---
+isFreqPattern?
+now: -1 -1 8
+now: 7 3 0
+now: 6 4 1
+now: 3 3 2
+now: -1 -1 5
+now: 1 3 0
+now: 4 4 1
+now: 2 4 1
+now: -1 -1 6
+now: 3 3 0
+now: 1 3 0
+now: 4 4 1
+now: 0 4 1
+now: -1 -1 4
+now: 2 3 0
+now: 3 4 1
+now: 0 3 2
+now: -1 -1 6
+now: -1 -1 0
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 2 3
+
+pattern cnt: 2
+No, cut.
+backloc == -1
+DFSCode::output: 
+0 1 3 2 4
+0 2 3 3 2
+
+No, cut.
+Running Time: 108ms

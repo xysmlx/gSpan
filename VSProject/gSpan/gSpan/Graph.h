@@ -50,8 +50,8 @@ public:
 	void dele(int u, int v, int label);
 
 public:
-	const static int maxv = 1010;
-	const static int maxe = 5010;
+	const static int maxv = 250;
+	const static int maxe = 510;
 
 public:
 	int head[maxv];

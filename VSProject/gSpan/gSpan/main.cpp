@@ -5,7 +5,7 @@ Solver solver;
 
 void init()
 {
-	solver.init("in.txt", 0.5);
+	solver.init("in.txt", 0.6);
 }
 void input()
 {
@@ -22,6 +22,8 @@ void output()
 
 int main()
 {
+	freopen("debug.txt", "w", stdout);
+
 	init();
 	input();
 	solve();
@@ -30,3 +32,10 @@ int main()
 	//getchar();
 	return 0;
 }
+
+/* Test data set
+ * Graph.data
+ * cntGraph == 10000
+ * vn < 250
+ * en < 250
+ */
