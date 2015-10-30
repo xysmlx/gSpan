@@ -124,7 +124,7 @@ void GSPAN::DeleteUnFreqEdge()
 
 bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now)
 {
-	cout << "now: " << now << " " << graph.vtx[now].label << " " << graph.vtx[now].seq << endl;
+	//cout << "now: " << now << " " << graph.vtx[now].label << " " << graph.vtx[now].seq << endl;
 	if (ith == (int)dfscode.dfsCodeList.size()) return 1;
 	if (now == -1) // From initial vertex
 	{
@@ -156,16 +156,22 @@ bool GSPAN::JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, i
 	}
 	else // Forward
 	{
-		for (int i = graph.head[now];~i;i = graph.edge[i].next)
+		for (int u = 0;u < graph.vn;u++)
 		{
-			Edge e = graph.edge[i];
-			if (e.label == dfscode.dfsCodeList[ith].lab&&
-				graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
-				graph.vtx[e.v].seq == -1)
+			if (graph.vtx[u].seq == dfscode.dfsCodeList[ith].a)
 			{
-				graph.vtx[e.v].seq = dfscode.dfsCodeList[ith].b;
-				if (JudgePatternInGraph(graph, dfscode, ith + 1, e.v)) return 1;
-				graph.vtx[e.v].seq = -1;
+				for (int i = graph.head[u];~i;i = graph.edge[i].next)
+				{
+					Edge e = graph.edge[i];
+					if (e.label == dfscode.dfsCodeList[ith].lab&&
+						graph.vtx[e.v].label == dfscode.dfsCodeList[ith].lb&&
+						graph.vtx[e.v].seq == -1)
+					{
+						graph.vtx[e.v].seq = dfscode.dfsCodeList[ith].b;
+						if (JudgePatternInGraph(graph, dfscode, ith + 1, e.v)) return 1;
+						graph.vtx[e.v].seq = -1;
+					}
+				}
 			}
 		}
 	}
@@ -375,18 +381,19 @@ void GSPAN::gSpan()
 	GenSeedSet();
 	DeleteUnFreqEdge();
 
-	puts("For debug ---");
+	/*puts("For debug ---");
 	DFSCode df;
 	df.dfsCodeList.push_back(DFSCodeNode(0, 1, 2, 3, 3));
 	df.dfsCodeList.push_back(DFSCodeNode(1, 2, 3, 2, 4));
 	df.dfsCodeList.push_back(DFSCodeNode(2, 0, 4, 4, 2));
 	df.dfsCodeList.push_back(DFSCodeNode(1, 3, 3, 2, 4));
-	//cout << JudgePatternInGraph(graph[0], df, 0, -1) << endl;
+	cout << JudgePatternInGraph(graph[0], df, 0, -1) << endl;
 	cout << JudgePatternInGraph(graph[1], df, 0, -1) << endl;
-	//cout << JudgePatternInGraph(graph[2], df, 0, -1) << endl;
-	//cout << JudgePatternInGraph(graph[3], df, 0, -1) << endl;
-	//cout << JudgePatternInGraph(graph[4], df, 0, -1) << endl;
-	puts("For debug ---");
+	cout << JudgePatternInGraph(graph[2], df, 0, -1) << endl;
+	cout << JudgePatternInGraph(graph[3], df, 0, -1) << endl;
+	cout << JudgePatternInGraph(graph[4], df, 0, -1) << endl;
+	puts("For debug ---");*/
+
 	for (int i = 0;i < (int)freqEdge.size();i++)
 	{
 		cout << "freqEdge: " << i << endl;
