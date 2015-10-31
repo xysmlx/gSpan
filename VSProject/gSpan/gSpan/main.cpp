@@ -5,7 +5,8 @@ Solver solver;
 
 void init()
 {
-	solver.init("in.txt", 0.6);
+	//solver.init("in.txt", 0.6);
+	solver.init("graph.data", 0.5);
 }
 void input()
 {
@@ -22,7 +23,7 @@ void output()
 
 int main()
 {
-	freopen("debug.txt", "w", stdout);
+	//freopen("debug.txt", "w", stdout);
 
 	init();
 	input();

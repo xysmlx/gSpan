@@ -80,7 +80,12 @@ public:
 	bool operator == (const DFSCode &o) const
 	{
 		if (dfsCodeList.size() != o.dfsCodeList.size()) return 0;
-		return (!(*this < o)) && (!(o < *this));
+		for (int i = 0;i < (int)dfsCodeList.size();i++)
+			if (!(dfsCodeList[i] == o.dfsCodeList[i])) return 0;
+		return 1;
+
+		/*if (dfsCodeList.size() != o.dfsCodeList.size()) return 0;
+		return (!(*this < o)) && (!(o < *this));*/
 	}
 
 public:

@@ -40,6 +40,7 @@ public:
 	GSPAN() {}
 	void init();
 	void input(const InputFilter &_inputFilter, double _minSup); // Build relabeled graph
+	void output();
 	void GenSeedSet(); // Generate the seed edge set
 	void DeleteEdgeFlag(const Edge &e); // Label deleted edge
 	void DeleteEdge(const Edge &e); // Delete edge from graph
@@ -53,14 +54,14 @@ public:
 	void SubMining(const Edge &base); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
 
+	void debug(); // For debug
+
 public:
 	const static int maxGraph = 10010; // Maximum graph number of graph set
 
 public:
 	ofstream out; // Output to file
 	DFSCode tmpDFSCode; // Temp dfscode
-
-	int cntFreqPattern; // Number of freq pattern
 
 	double minSup; // minimum support
 	int minSupDeg; // minSup * cntGraph
@@ -73,6 +74,8 @@ public:
 
 	vector<Edge> freqEdge; // Freq edge set
 	vector<Edge> unFreqEdge; // Unfreq edge set
+
+	vector<DFSCode> freqPattern; // Freq pattern, the answer
 };
 
 #endif

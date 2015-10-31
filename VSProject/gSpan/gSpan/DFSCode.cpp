@@ -137,12 +137,12 @@ DFSCode DFSCode::FindMinDFSCode()
 
 bool DFSCode::isMinDFSCode()
 {
-	this->output();
+	/*this->output();
 	if (FindMinDFSCode() == *this)
 	{
 		cout << "+++Mincode+++" << endl;
 		this->output();
 		cout << "---Mincode---" << endl;
-	}
+	}*/
 	return FindMinDFSCode() == *this;
 }

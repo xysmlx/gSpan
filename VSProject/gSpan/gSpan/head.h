@@ -22,7 +22,7 @@
 #include <fstream>
 #include <algorithm>
 #include <functional>
-#include <windows.h>
+//#include <windows.h>
 using namespace std;
 typedef long long ll;
 //#define pb push_back

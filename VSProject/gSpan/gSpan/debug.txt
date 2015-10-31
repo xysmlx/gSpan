@@ -12,13 +12,19 @@ DFSCode::output:
 1 2 3 3 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 3 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 3 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -30,13 +36,19 @@ DFSCode::output:
 0 2 2 3 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 0 2 2 3 3
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -47,12 +59,19 @@ DFSCode::output:
 1 2 3 2 4
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
 
 pattern cnt: 4
+--isFreqPattern?--
+++Yes, continue.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+
+--Yes, continue.--
 backloc >= 0
 DFSCode::output: 
 0 1 2 3 3
@@ -66,13 +85,14 @@ DFSCode::output:
 2 0 4 4 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
 2 0 4 4 2
 
 pattern cnt: 4
+--isFreqPattern?--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -88,7 +108,7 @@ DFSCode::output:
 2 2 4 4 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -96,7 +116,15 @@ DFSCode::output:
 2 2 4 4 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 4 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -112,7 +140,7 @@ DFSCode::output:
 1 2 3 3 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -120,7 +148,15 @@ DFSCode::output:
 1 2 3 3 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -128,7 +164,14 @@ DFSCode::output:
 2 0 4 4 2
 0 2 2 3 3
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -143,7 +186,7 @@ DFSCode::output:
 1 2 3 2 4
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -151,15 +194,147 @@ DFSCode::output:
 1 2 3 2 4
 
 pattern cnt: 3
-No, cut.
+--isFreqPattern?--
+++Yes, continue.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+--Yes, continue.--
+backloc >= 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
+pattern cnt: 1
+--isFreqPattern?--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
 2 0 4 4 2
+1 2 3 2 4
+2 2 4 4 2
+
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 4 2
+
+--No, cut.--
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
 0 2 2 3 3
 
-No, cut.
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+pattern cnt: 0
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+--No, cut.--
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 2 3
+
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 2 3
+
+--No, cut.--
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+pattern cnt: 0
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -174,7 +349,7 @@ DFSCode::output:
 2 2 4 2 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -182,7 +357,15 @@ DFSCode::output:
 2 2 4 2 3
 
 pattern cnt: 2
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+2 2 4 2 3
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -198,7 +381,7 @@ DFSCode::output:
 1 2 3 3 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -206,7 +389,15 @@ DFSCode::output:
 1 2 3 3 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 3 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
@@ -214,7 +405,14 @@ DFSCode::output:
 2 0 4 4 2
 0 2 2 3 3
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -229,7 +427,7 @@ DFSCode::output:
 1 2 3 2 4
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
@@ -237,15 +435,147 @@ DFSCode::output:
 1 2 3 2 4
 
 pattern cnt: 3
-No, cut.
+--isFreqPattern?--
+++Yes, continue.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+
+--Yes, continue.--
+backloc >= 0
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 0 4 4 2
+
+pattern cnt: 1
+--isFreqPattern?--
 backloc == -1
 DFSCode::output: 
 0 1 2 3 3
 1 2 3 2 4
 2 0 4 4 2
+1 2 3 2 4
+2 2 4 4 2
+
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 4 2
+
+--No, cut.--
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
 0 2 2 3 3
 
-No, cut.
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+pattern cnt: 0
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+--No, cut.--
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 2 3
+
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+2 2 4 2 3
+
+--No, cut.--
+backloc == -1
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
++++Mincode+++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+---Mincode---
+++isFreqPattern?++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+pattern cnt: 0
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 3 3
+1 2 3 2 4
+2 0 4 4 2
+1 2 3 2 4
+0 2 2 3 3
+
+--No, cut.--
 freqEdge: 1
 backloc == -1
 DFSCode::output: 
@@ -258,13 +588,19 @@ DFSCode::output:
 1 2 4 4 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 4 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 4 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 4 4
@@ -276,13 +612,19 @@ DFSCode::output:
 0 2 2 3 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 0 2 2 3 3
 
 pattern cnt: 0
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
@@ -293,12 +635,19 @@ DFSCode::output:
 1 2 4 2 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 
 pattern cnt: 4
+--isFreqPattern?--
+++Yes, continue.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+
+--Yes, continue.--
 backloc >= 0
 DFSCode::output: 
 0 1 2 4 4
@@ -312,13 +661,14 @@ DFSCode::output:
 2 0 3 3 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 2 0 3 3 2
 
 pattern cnt: 0
+--isFreqPattern?--
 backloc == -1
 DFSCode::output: 
 0 1 2 4 4
@@ -332,14 +682,21 @@ DFSCode::output:
 2 2 3 3 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 2 2 3 3 2
 
 pattern cnt: 0
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 3 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 4 4
@@ -353,21 +710,34 @@ DFSCode::output:
 1 2 4 4 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 1 2 4 4 2
 
 pattern cnt: 1
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 4 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 0 2 2 3 3
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
@@ -380,21 +750,34 @@ DFSCode::output:
 1 2 4 2 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 1 2 4 2 3
 
 pattern cnt: 2
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+1 2 4 2 3
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 0 2 2 3 3
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+0 2 2 3 3
+
+--No, cut.--
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
@@ -407,82 +790,69 @@ DFSCode::output:
 2 2 3 2 4
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
 2 2 3 2 4
 
 pattern cnt: 3
-No, cut.
-backloc == -1
+--isFreqPattern?--
+++Yes, continue.++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
-1 2 4 4 2
+2 2 3 2 4
+
+--Yes, continue.--
+backloc >= 0
+DFSCode::output: 
+0 1 2 4 4
+1 2 4 2 3
+2 2 3 2 4
+2 0 4 4 2
 
 +++Mincode+++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
-1 2 4 4 2
+2 2 3 2 4
+2 0 4 4 2
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 2 4 4
 1 2 4 2 3
-1 2 4 4 2
+2 2 3 2 4
+2 0 4 4 2
 
 pattern cnt: 1
-No, cut.
-backloc == -1
-DFSCode::output: 
-0 1 2 4 4
-1 2 4 2 3
-0 2 2 3 3
-
-No, cut.
-DFSCode::output: 
-0 1 2 4 4
-1 2 4 2 3
-1 2 4 2 3
-
-+++Mincode+++
-DFSCode::output: 
-0 1 2 4 4
-1 2 4 2 3
-1 2 4 2 3
-
----Mincode---
-isFreqPattern?
-DFSCode::output: 
-0 1 2 4 4
-1 2 4 2 3
-1 2 4 2 3
-
-pattern cnt: 2
-No, cut.
-backloc == -1
-DFSCode::output: 
-0 1 2 4 4
-1 2 4 2 3
-0 2 2 3 3
-
-No, cut.
+--isFreqPattern?--
+backloc >= 0
 freqEdge: 2
 backloc == -1
 DFSCode::output: 
 0 1 3 2 4
 1 2 4 4 2
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 4 2
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 3 2 4
 0 2 3 3 2
 
-No, cut.
+++No, cut.++
+DFSCode::output: 
+0 1 3 2 4
+0 2 3 3 2
+
+--No, cut.--
 DFSCode::output: 
 0 1 3 2 4
 1 2 4 2 3
@@ -493,17 +863,28 @@ DFSCode::output:
 1 2 4 2 3
 
 ---Mincode---
-isFreqPattern?
+++isFreqPattern?++
 DFSCode::output: 
 0 1 3 2 4
 1 2 4 2 3
 
 pattern cnt: 2
-No, cut.
+--isFreqPattern?--
+++No, cut.++
+DFSCode::output: 
+0 1 3 2 4
+1 2 4 2 3
+
+--No, cut.--
 backloc == -1
 DFSCode::output: 
 0 1 3 2 4
 0 2 3 3 2
 
-No, cut.
-Running Time: 62ms
+++No, cut.++
+DFSCode::output: 
+0 1 3 2 4
+0 2 3 3 2
+
+--No, cut.--
+Running Time: 89ms

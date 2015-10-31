@@ -48,6 +48,7 @@ void Solver::solve()
 void Solver::output()
 {
 	//debug();
+	gspan.output();
 	edTime = clock();
 	cout << "Running Time: " << (double)(edTime - stTime) / (CLOCKS_PER_SEC / 1000.0) << "ms" << endl;
 }
