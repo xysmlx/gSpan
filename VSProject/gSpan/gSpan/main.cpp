@@ -5,8 +5,7 @@ Solver solver;
 
 void init()
 {
-	//solver.init("in.txt", 0.6);
-	solver.init("graph.data", 0.5);
+	solver.init("in.txt", 0.6);
 }
 void input()
 {
@@ -30,7 +29,6 @@ int main()
 	solve();
 	output();
 
-	//getchar();
 	return 0;
 }
 

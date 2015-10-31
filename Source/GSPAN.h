@@ -1,9 +1,10 @@
 #ifndef GSPAN_H
 #define GSPAN_H
 
-#include "firsthead.h"
+#include "head.h"
 #include "InputFilter.h"
 #include "Graph.h"
+#include "DFSCode.h"
 
 class GSPAN
 {
@@ -12,6 +13,7 @@ public:
 	{
 		bool operator ()(const Edge &o1, const Edge &o2) const
 		{
+			if (o1.u == o2.u&&o1.v == o2.v) return o1.label < o2.label;
 			if (o1.u == o2.u) return o1.v < o2.v;
 			return o1.u < o2.u;
 		}
@@ -38,14 +40,29 @@ public:
 	GSPAN() {}
 	void init();
 	void input(const InputFilter &_inputFilter, double _minSup); // Build relabeled graph
+	void output();
 	void GenSeedSet(); // Generate the seed edge set
-	void SubMining(); // Sub-Mining Procedure
+	void DeleteEdgeFlag(const Edge &e); // Label deleted edge
+	void DeleteEdge(const Edge &e); // Delete edge from graph
+	void DeleteUnFreqEdge(); // Delete unfreq edge
+	void RebuildGraph(int id); // Rebuild graph with id
+	bool JudgePatternInGraph(Graph &graph, const DFSCode &dfscode, int ith, int now); // DFS, ith = dfscode.dfsCodeList[ith], now = now vertex
+	bool isPatternInGraph(Graph graph, const DFSCode &dfscode); // Is this pattern in this graph?
+	void SolveFreqPattern(const DFSCode &dfscode); // Work when dfscode is freq pattern
+	bool isFreqPattern(const DFSCode &dfscode); // Is dfscode a freq pattern?
+	void BuildPattern(DFSCode &dfscode, int loc, int backloc, int maxseq); // DFS build pattern and test, loc = now extend location in rightpath, backloc = -1(forward) or backward location in rightpath, maxseq = max sequence id
+	void SubMining(const Edge &base); // Sub-Mining Procedure
 	void gSpan(); // Run gSpan
+
+	void debug(); // For debug
 
 public:
 	const static int maxGraph = 10010; // Maximum graph number of graph set
 
 public:
+	ofstream out; // Output to file
+	DFSCode tmpDFSCode; // Temp dfscode
+
 	double minSup; // minimum support
 	int minSupDeg; // minSup * cntGraph
 
@@ -56,6 +73,9 @@ public:
 	set<Edge, EdgeCMP> freqEdgeVis; // Visit or not in a graph
 
 	vector<Edge> freqEdge; // Freq edge set
+	vector<Edge> unFreqEdge; // Unfreq edge set
+
+	vector<DFSCode> freqPattern; // Freq pattern, the answer
 };
 
 #endif

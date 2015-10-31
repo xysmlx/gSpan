@@ -1,25 +1,28 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
-#include "firsthead.h"
+#include "head.h"
 #include "InputFilter.h"
 #include "GSPAN.h"
 
 class Solver
 {
 public:
-	void init();
+	void init(string _inputPath = "in.txt", double _minSup = 0.5);
 	void input();
 	void debug();
 	void solve();
 	void output();
 
 public:
-	double minSup = 0.5; // minimum support
+	double minSup; // minimum support
 
 public:
 	InputFilter inputFilter;
 	GSPAN gspan;
+
+	int stTime, edTime;
+	string inputPath;
 };
 
 #endif

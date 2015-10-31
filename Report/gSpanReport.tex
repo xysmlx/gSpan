@@ -27,7 +27,7 @@
 \usepackage{lastpage}
 \pagestyle{fancy}
 %\renewcommand{\headrulewidth}{1pt}  %页眉线宽，设为0可以去页眉线
-\lhead{\small{gSpan实验报告}}
+\lhead{\small{gSpan算法实验报告}}
 \chead{}
 \rhead{\small{马凌霄(1501111302)}}
 \lfoot{}
@@ -59,6 +59,15 @@
 \newcolumntype{C}[1]{>{\PreserveBackslash\centering}p{#1}}
 \newcolumntype{R}[1]{>{\PreserveBackslash\raggedleft}p{#1}}
 \newcolumntype{L}[1]{>{\PreserveBackslash\raggedright}p{#1}}
+
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\renewcommand{\algorithmcfname}{算法}
+
+\theoremstyle{definition}
+\newtheorem{defn}{定义}
+\SetKwProg{Fn}{Function}{:}{end}
+
+\usepackage{xcolor}
 
 %\renewcommand{\figurename}{\zihaowu{Figure}}
 
@@ -108,7 +117,7 @@
 \renewcommand{\refname}{\centerline{\Large 参考文献}}
 %\pagestyle{headings}
 \begin{document}
-\title{gSpan实验报告}
+\title{gSpan算法实验报告}
 \author{海量图数据的管理和挖掘}
 \date{\today}
 \maketitle
@@ -118,13 +127,83 @@
 学号：1501111302\\
 院系：信息科学技术学院\\
 EMail：xysmlx@gmail.com\\
-Repository (Private): \url{https://bitbucket.org/xysmlx/gspan}
+Repository (Private): \url{https://bitbucket.org/xysmlx/gspan}\\
+Git (Remote): \url{https://xysmlx@bitbucket.org/xysmlx/gspan.git}
 }
+
+\ \\
+\begin{center}
+  \includegraphics[width=400 pt]{repo.jpg}
+\end{center}
 \newpage
 \tableofcontents
 \newpage
 \section{gSpan算法简述}
+gSpan是Xifeng Yan和Jiawei Han在ICDM 02的论文\cite{bib:gspanpaper}《gSpan: Graph-Based Substructure Pattern Mining》提出的用于挖掘频繁子图的算法，该论文的主要贡献有两点：
+\begin{itemize}
+  \item 提出新的频繁子图挖掘算法，比当时最快的FSG算法快数倍；
+  \item 提出DFSCODE理论，用于解决频繁字图挖掘的核心问题：子图同构问题。
+\end{itemize}
 
+\begin{defn}
+\textbf{频繁子图：}给定图集合$G$，给定阈值$minSup$，若子图$g\in G$在图集合$G$中出现的频率（图集合的每个子图只计算1次）大于阈值$minSup$，则子图$g$为频繁子图。
+\end{defn}
+
+gSpan算法流程如算法\ref{alg:gspan}所示。
+
+\begin{algorithm}[H]
+\caption{gSpan算法主框架}
+\label{alg:gspan}
+\KwIn{图集合$G$, 阈值$minSup$}
+\KwOut{频繁子图}
+\Fn{gSpan($G$, $minSup$)}
+{
+    对$G$中所有的顶点和边按照出现的频率从大到小重新标号\;
+    计算$G$中的频繁边，记为$FreqEdge$\;
+    删除$G$中不在$FreqEdge$中的边\;
+    对$FreqEdge$中的边按照频率从大到小排序\;
+    \For{边$e\in FreqEdge$}
+    {
+        SubMining($G$,$e$,$FreqEdge$,$minSup$)\;
+        从$G$中删除所有的$e$\;
+        $FreqEdge=FreqEdge-e$\;
+    }
+}
+\end{algorithm}
+
+\ \\
+
+\begin{algorithm}[H]
+\caption{gSpan算法SubMining过程}
+\label{alg:submining}
+\KwIn{图集合$G$, 阈值$minSup$, 频繁边集和$FreqEdge$, 当前DFSCODE$dfscode$}
+\KwOut{频繁子图}
+\Fn{SubMining($G$,$dfscode$,$FreqEdge$,$minSup$)}
+{
+    构建一条边（根据规则正行或反向）的DFSCODE $df$\;
+    $dfscode=dfscode+df$\;
+    \If{$dfscode$是最小DFSCODE}
+    {
+        计算$dfscode$的频率$Sup$\;
+        \If{$Sup\geq minSup$}
+        {
+            SubMining($G$,$dfscode$,$FreqEdge$,$minSup$)\;
+        }
+        return\;
+    }
+}
+\end{algorithm}
+
+%\begin{algorithm}[H]
+%\caption{找最小DFSCODE}
+%\label{alg:genmindfscode}
+%\KwIn{图$g$, 当前的DFSCODE$ret$, 当前点$now$}
+%\KwOut{最小DFSCODE}
+%\Fn{GenMinDFSCode($g$, $ret$, $now$)}
+%{
+%
+%}
+%\end{algorithm}
 
 \section{程序设计}
 \subsection{图-类：class Graph}
@@ -195,10 +274,44 @@ public:
 \begin{itemize}
   \item $head[]$数组：大小为顶点数，存这个点的对应的第一条边在$edge[]$数组的下标
   \item $edge[]$数组：用数组存储边
-  \item $Edge$边的结构：
-  \item 
-  \item 
+  \item $Edge$边的结构：边的节点$u, v$，边的标号$label$，删除标记$del$，下一个访问的边的下标$next$
+  \item 添加边：
+  \begin{verbatim}
+void Graph::addv(int id, int label)
+{
+    vtx[id] = Vertex(id, label);
+    vn++;
+}
+void Graph::addse(int u, int v, int label)
+{
+    edge[en] = Edge(u, v, label, head[u]);
+    head[u] = en++;
+}
+  \end{verbatim}
+  \item 访问一个定点的所有边
+\begin{verbatim}
+for (int i = head[u]; ~i; i = edge[i].next)
+{
+    Edge e = edge[i];
+    // Solve this edge
+}
+\end{verbatim}
+  \item 删除边：令边的$del=1$，由于边$i$和边$i^1$互为反向边，所以直接遍历一次即可。
+\begin{verbatim}
+void Graph::dele(int u, int v, int label)
+{
+    for (int i = head[u];~i;i = edge[i].next)
+        if (edge[i].u == u&&edge[i].v == v&&edge[i].label == label)
+        {
+            edge[i].del = 1;
+            edge[i ^ 1].del = 1;
+            return;
+        }
+}
+\end{verbatim}
 \end{itemize}
+
+图里面用数组存储节点的访问顺序和点的标号，用链式前向星存储图的结构。
 
 \subsection{输入和重排序-类：class InputFilter}
 \subsubsection{定义代码}
@@ -226,8 +339,8 @@ public:
 	void filter();
 
 public:
-	const static int maxv = 1010;
-	const static int maxe = 5010;
+	const static int maxv = 250;
+	const static int maxe = 510;
 
 public:
 	int cntv[maxv], cnte[maxe];
@@ -240,6 +353,23 @@ public:
 };
 \end{lstlisting}
 \subsubsection{设计}
+\paragraph{数据设计}
+\begin{itemize}
+  \item $int\ cntv[maxv], cnte[maxe]$：点和边的出现次数计数
+  \item $int\ mpv[maxv], mpe[maxe]$：重标号后点和边对应的标号
+  \item $vector<Vertex>\ vecv$：存储所有的点
+  \item $vector<Edge>\ vece$：存储所有的边
+  \item $vector<int>\ listv, liste$：存储点和边的下标
+  \item $vector<Node>\ filterv, filtere$：用于对点和边按照频度进行排序
+  \item $vector<string>\ inputStr$：将文件输入存储下来，后面用$inputStr$将数据输入到$GSPAN$中
+\end{itemize}
+
+\paragraph{流程设计}
+\begin{itemize}
+  \item $void\ filterV()$：对点进行重标号，统计点的频度，然后对点的频度进行排序，将映射结果记录在$mpv[]$中
+  \item $void\ filterE()$：对边进行重标号，统计边的频度，然后对边的频度进行排序，将映射结果记录在$mpe[]$中
+  \item $void\ filter()$：对点和边进行重标号，直接调用filterV()和filterE()
+\end{itemize}
 
 \subsection{DFS Code五元组节点-结构体：struct DFSCodeNode}
 \subsubsection{定义代码}
@@ -279,6 +409,14 @@ struct DFSCodeNode
 };
 \end{lstlisting}
 \subsubsection{设计}
+\paragraph{数据设计}这里的五元组$(a,b,la,lab,lb)$为DFS编码五元组的$(i,j,l_i,l_{ij},l_j)$
+
+\paragraph{流程设计}
+\begin{itemize}
+  \item $bool\ isForward()$：是否为正向边，直接判断是否$a<b$
+  \item $bool\ isBackward()$：是否为反向边，直接判断是否$b<a$
+  \item 重载$==$号和$<$号，$<$号按照DFScode的小于号定义来写
+\end{itemize}
 
 \subsection{DFS Code-类：class DFSCode}
 \subsubsection{定义代码}
@@ -320,6 +458,36 @@ public:
 };
 \end{lstlisting}
 \subsubsection{设计}
+\paragraph{数据设计}
+\begin{itemize}
+  \item $dfsCodeList$：该DFSCODE，用vector存储五元组
+  \item $rightPath$：该DFSCODE的最右路径，$rightPath[rightPath.size()-1]$即为最右节点
+\end{itemize}
+
+\paragraph{流程设计}
+\begin{itemize}
+  \item $Convert2Graph$：将该DFSCODE转化为图
+  \begin{itemize}
+    \item 输入：该DFSCODE
+    \item 输出：该DFSCODE对应的链式前向星表示的图
+    \item 流程：直接按照dfsCodeList的dfscode序列插入点和边
+  \end{itemize}
+  \item $GenMinDFSCode$：用DFS生成最小DFSCODE
+  \begin{itemize}
+    \item 输入：DFS过程传递参数：$g$（当前的图，顶点带有访问序列编号），$ret$（当前的DFSCODE），$now$（从当前点扩展）
+    \item 输出：最小DFSCODE
+    \item 流程：
+    \begin{enumerate}
+      \item 选取当前节点
+      \item 在图中从当前节点找它的所有可能的正向边，并排序选取最小的正向边加入DFSCODE
+      \item 在图中找到通过加入正向边的新节点的所有反向边，排序，按照从小到大的顺序插入DFSCODE
+      \item 若构建的DFSCODE大于之前找到的DFSCODE，return；否则继续1-3的流程。
+      \item 重复1-4流程，直至生成可行的DFSCODE
+    \end{enumerate}
+  \end{itemize}
+  \item $FindMinDFSCode$：寻找最小DFSCODE，直接调用$GenMinDFSCode$
+  \item $isMinDFSCode$：判断该DFSCODE是否为最小DFSCODE，判断$FindMinDFSCode$找到的最小DFSCODE是否和该DFSCODE相同
+\end{itemize}
 
 \subsection{gSpan算法-类：class GSPAN}
 \subsubsection{定义代码}
@@ -381,7 +549,121 @@ public:
 };
 \end{lstlisting}
 \subsubsection{设计}
+\begin{itemize}
+  \item $ofstream\ out$：文件输出流
+  \item $DFSCode\ tmpDFSCode$：临时变量，临时的DFSCode 变量
+  \item $double\ minSup$：给定的$minSup$阈值$\in[0,1]$
+  \item $int\ minSupDeg$：由于double变量存在精度误差，所以令$minSupDeg = (int)ceil(minSup \times cntGraph)$，将阈值转化为int值频度
+  \item $Graph\ graph[maxGraph]$：图集合
+  \item $int\ cntGraph$：图集合的大小
+  \item $map<Edge, int, EdgeCMP>\ freqEdgeCnt$：临时变量，用于计算频繁边出现的频度
+  \item $set<Edge, EdgeCMP>\ freqEdgeVis$：临时变量，用于记录此边是否访问过
+  \item $vector<Edge>\ freqEdge$：频繁边集合
+  \item $vector<Edge>\ unFreqEdge$：不频繁边集和
+  \item $vector<DFSCode>\ freqPattern$：最终的频繁模式，即最终答案
+\end{itemize}
 
+\paragraph{流程设计}
+\begin{itemize}
+  \item $init$：初始化
+  \item $input$：读入图集合数据
+  \item $output$：输出最终的挖掘结果
+  \item $GenSeedSet$：生成初始频繁边集合
+  \begin{itemize}
+    \item 输入：无
+    \item 输出：初始频繁边集合
+    \item 流程：
+    \begin{enumerate}
+      \item 使用map记录每种边的频度
+      \item 频度大于阈值的边即为频繁边
+      \item 按照从大到小将所有频繁边进行排序
+    \end{enumerate}
+  \end{itemize}
+  \item $DeleteEdgeFlag$：对某条边在图集合中标记删除符号
+  \begin{itemize}
+    \item 输入：边
+    \item 输出：标记删除符号后的图集合
+    \item 流程：遍历整个图集合，对此边标记$del=1$
+  \end{itemize}
+  \item $DeleteEdge$：删除某条边，调用$DeleteEdgeFlag$，再调用$RebuildGraph$重构整个图集合
+  \item $DeleteUnFreqEdge$：删除所有不频繁的边，对$unFreqEdge$里面的元素调用$DeleteEdgeFlag$后，再调用$RebuildGraph$重构整个图集合
+  \item $RebuildGraph$：重构整个图集合
+  \begin{itemize}
+    \item 输入：带删除标记的图集合
+    \item 输出：重构后的图集合
+    \item 流程：直接使用不带删除标记的点和边构建新的图集合
+  \end{itemize}
+  \item $JudgePatternInGraph$：
+  \begin{itemize}
+    \item 输入：dfscode，一个图
+    \item 输出：此dfscode是否在图中出现
+    \item 流程：
+    \begin{enumerate}
+      \item 找到起始顶点（标号和dfscode的0一样）集合；
+      \item 对于起始顶点，直接按照dfscode的顺序在图上进行dfs，如果能够完全通过整个dfscode，则出现，否则没有出现；
+      \item 对于起始顶点的每个顶点执行2。
+    \end{enumerate}
+  \end{itemize}
+  \item $isPatternInGraph$：判断该模式是否在某图中出现，直接调用$JudgePatternInGraph$。
+  \item $SolveFreqPattern$：处理该频繁模式，直接将它插入到结果集合中。
+  \item $isFreqPattern$：判断是否为频繁模式
+  \begin{itemize}
+    \item 输入：DFSCODE
+    \item 输出：是否为频繁模式
+    \item 流程：
+    \begin{enumerate}
+      \item 对于图集合的每一个图，调用$isPatternInGraph$，计算频率$sup$
+      \item 如果$sup\geq minSup$，返回 $TRUE$，否则返回$FALSE$。
+    \end{enumerate}
+  \end{itemize}
+  \item $BuildPattern$：DFS构建一个模式并判断是否为频繁模式
+  \begin{itemize}
+    \item 输入：当前的DFSCODE；loc是当前在rightpath中扩展节点的下标；backloc为-1表示进行扩展正向边，为大于等于0的数表示应加入的反向边终点在rightpath中的位置；maxseq表示当前最大的访问顺序标号。
+    \item 输出：判断频繁模式，以及下一个DFSCODE
+    \item 流程：
+    \begin{enumerate}
+      \item $backloc==-1$?
+      \begin{itemize}
+        \item $backloc==-1$，进行正向边扩展
+        \begin{enumerate}
+          \item 查找$loc$对应的节点可行的正向边扩展
+          \item 加入正向边，构造新的$dfscode$
+          \item 判断是否该$dfscode$频繁且是最小DFSCODE
+          \begin{itemize}
+            \item 是，则判断：如果$rightpath.size()<3$，表明没有反向边可加入，调用$BuildPattern(dfscode, (int)dfscode.rightPath.size() - 1, -1, maxseq + 1)$继续加正向边；如果$rightpath.size()\geq 3$，表明有反向边可加入，调用$BuildPattern(dfscode, t - 1, 0, maxseq)$，加入反向边。
+            \item 否，则根据$rightpath$，向祖先节点查找可以加入正向边的点，并同步更新$rightpath$，然后调用$BuildPattern(dfscode,$ $ (int)dfscode.rightPath.size() - 1, -1, maxseq)$从此rightpath上的祖先节点扩展正向边
+          \end{itemize}
+        \end{enumerate}
+        \item $backloc!=-1$，进行反向边扩展
+        \begin{enumerate}
+          \item 对于每一个与$rightpath[loc]$和$rightpath[backloc]$顶点标号相同的边，构造五元组，加入当前$dfscode$
+          \item 判断是否该$dfscode$频繁且是最小DFSCODE
+          \item 如果$loc-backloc<2$，则调用$BuildPattern(dfscode, loc, -1, maxseq)$进行正向边扩展，否则调用$BuildPattern(dfscode, loc, backloc + 1, maxseq)$继续扩展反向边。
+        \end{enumerate}
+      \end{itemize}
+    \end{enumerate}
+  \end{itemize}
+  \item $SubMining$：对于一个频繁边，进行挖掘
+  \begin{itemize}
+    \item 输入：频繁边
+    \item 输出：挖掘出的频繁模式
+    \item 流程：对于每一条边，以其为起点，调用$BuildPattern$，DFS寻找频繁模式
+  \end{itemize}
+  \item $gSpan$：gSpan算法主流程
+  \begin{itemize}
+    \item 输入：图集合$G$，阈值$minSup$
+    \item 输出：频繁子图集合
+    \item 流程：
+    \begin{enumerate}
+      \item 调用$input$读取被$InputFilter$预处理好的图集合
+      \item 调用$GenSeedSet$生成频繁边集合
+      \item 调用$DeleteUnFreqEdge$删除不频繁边
+      \item 对于$freqEdge$每一个元素，调用$SubMining$
+      \item 调用$DeleteEdge$在图集合中删除该边
+      \item 对于$freqEdge$每一个元素执行4-5步
+    \end{enumerate}
+  \end{itemize}
+\end{itemize}
 
 \section{程序测试}
 \subsection{测试环境}
@@ -404,10 +686,19 @@ public:
   \label{tab:environment}%
 \end{table}%
 
-该代码已上传至BitBucket的私有仓库，课程结束后会开源
+该代码已上传至BitBucket的私有仓库，课程结束后会开源。
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=400 pt]{repo.jpg}
+  \caption{\zihaowu BitBucket私有仓库}\label{fig:repo}
+\end{figure}
+
+该代码在Windows 10、OS X Yosemite、Ubuntu 12.04.2 LTS下分别用Visual Studio、Clang++、G++编译通过，可跨平台。
 
 \subsection{正确性测试}
 \subsubsection{测试数据}
+测试数据集为网上的博客的一个展示\footnote{数据来源：\url{http://simpledatamining.blogspot.ca/2015/04/how-to-mine-frequent-patterns-in-graphs.html}}。
+
 \begin{figure}[H]
   \centering
   \includegraphics[width=400 pt]{Input.jpg}
@@ -491,7 +782,7 @@ t # -1
 \subsubsection{输出结果}
 \begin{figure}[H]
   \centering
-  \includegraphics[width=250 pt]{FreqPattern.jpg}
+  \includegraphics[width=200 pt]{FreqPattern.jpg}
   \caption{\zihaowu 正确性测试的结果}\label{fig:freqpattern}
 \end{figure}
 
@@ -530,7 +821,7 @@ Pattern #8:
 \subsection{运行速度测试}
 \subsubsection{测试数据}
 测试数据为graph.data：图集合中有10000个图，每个图最大点数不超过250，边数不超过250。
-\subsubsection{对照程序}
+\subsubsection{测试结果}
 使用Xifeng Yan, Jiawei Han的原作者的程序 \footnote{\url{http://www.cs.ucsb.edu/~xyan/software/gSpan2009-02-20/gSpan6.tar.gz}}进行运行速度测试的对比，$minSup$阈值选取和运行时间数据如表\ref{tab:runtime}所示。运行时间作图如图\ref{fig:runtime}所示。
 \begin{figure}[H]
   \centering
@@ -544,7 +835,7 @@ Pattern #8:
   \caption{\zihaowu 运行时间测试}
     \begin{tabular}{R{2cm}R{4cm}R{4cm}}
     \toprule
-    \multicolumn{1}{c}{minSup} & \multicolumn{1}{c}{My(ms)} & \multicolumn{1}{c}{Yan(ms)} \\
+    minSup & My(ms) & Yan(ms) \\
     \midrule
     0.9   & 2050  & 1837 \\
     0.8   & 2790  & 2299 \\
@@ -570,25 +861,27 @@ Pattern #8:
 \end{table}%
 
 
-从表\ref{table:runtime}和图\ref{fig:runtime}看出，本程序的性能不如原作者的程序的性能。还有一些优化可以加入，但是因为时间的原因，所以没有加入程序。
+从表\ref{tab:runtime}和图\ref{fig:runtime}看出，本程序的性能不如原作者的程序的性能。还有一些优化可以加入，但是因为时间的原因，所以没有加入程序。
+
+\section{总结}
+通过此次实验，完整的编写gSpan算法，对频繁子图挖掘和DFSCODE理论有了更深的理解。在通读Xifeng Yan的论文后，发现整个gSpan算法的框架其实是比较naive的：找到频繁边然后让边扩展再在图集合中匹配。然而在我看来，这篇论文的发光点以及核心是DFSCODE理论，正是DFSCODE使得gSpan的性能明显优于当时最好的频繁子图挖掘算法FSG。
+
+此程序的性能不如原作者的程序，不过由于时间原因，还有一些想到的优化策略没有加入程序，期望加入程序后再次和原作者的程序比一比。
 
 \paragraph{优化策略}
 \begin{itemize}
   \item 链式前向星写的图的点数和边数开的较大，可以根据图的大小开；
   \item 将枚举构造频发模式改为在图集合中查找构造频繁模式；
-  \item gSpan有很好的并行性，所以可以使用多线程：将每个任务放入一个队列，然后让每个线程从队列中提取任务执行。
+  \item gSpan有很好的并行性，所以可以使用多线程：将每个任务放入一个队列，然后让每个线程从队列中提取任务执行；
+  \item gSpan有很好的并行性，所以可以使用MapReduce等分布式框架\cite{bib:mrgspan}或者GPU计算\cite{bib:gpugspan}。
 \end{itemize}
 
+\newpage
 
-\appendix
-\section{备注}
-\subsection{}
-\begin{lstlisting}[language=c++]
-#include<cstdio>
-int main()
-{
-	return 0;
-}
-\end{lstlisting}
+\begin{thebibliography}{100}
+\bibitem[1]{bib:gspanpaper}Yan, Xifeng, and Jiawei Han. "gspan: Graph-based substructure pattern mining." Data Mining, 2002. ICDM 2003. Proceedings. 2002 IEEE International Conference on. IEEE, 2002.
+\bibitem[2]{bib:mrgspan}Lin, Wenqing, Xiaokui Xiao, and Gabriel Ghinita. "Large-scale frequent subgraph mining in mapreduce." Data Engineering (ICDE), 2014 IEEE 30th International Conference on. IEEE, 2014.
+\bibitem[3]{bib:gpugspan}Kessl, Robert, et al. "Parallel Graph Mining with GPUs." The 3rd International Workshop on Big Data, Streams and Heterogeneous Source Mining: Algorithms, Systems, Programming Models and Applications. 2014.
+\end{thebibliography}
 
 \end{document}

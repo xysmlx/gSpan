@@ -15,3 +15,5 @@ Report/*.out
 # ignore directories
 VSProject/gSpan/Debug
 VSProject/gSpan/gSpan/Debug
+VSProject/gSpan/Release
+VSProject/gSpan/gSpan/Release

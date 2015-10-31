@@ -31,19 +31,19 @@ void InputFilter::adde(int u, int v, int label)
 
 void InputFilter::filterV()
 {
-	for (int i = 0; i < listv.size(); i++)
+	for (int i = 0; i < (int)listv.size(); i++)
 		filterv.push_back(Node(listv[i], cntv[listv[i]]));
 	sort(filterv.begin(), filterv.end());
-	for (int i = 0; i < filterv.size(); i++)
+	for (int i = 0; i < (int)filterv.size(); i++)
 		mpv[filterv[i].label] = i + 2;
 }
 
 void InputFilter::filterE()
 {
-	for (int i = 0; i < liste.size(); i++)
+	for (int i = 0; i < (int)liste.size(); i++)
 		filtere.push_back(Node(liste[i], cnte[liste[i]]));
 	sort(filtere.begin(), filtere.end());
-	for (int i = 0; i < filtere.size(); i++)
+	for (int i = 0; i < (int)filtere.size(); i++)
 		mpe[filtere[i].label] = i + 2;
 }
 

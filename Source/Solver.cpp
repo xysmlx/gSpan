@@ -1,18 +1,21 @@
 #include "Solver.h"
 
-void Solver::init()
+void Solver::init(string _inputPath, double _minSup)
 {
 	inputFilter.init();
 	gspan.init();
+	inputPath = _inputPath;
+	minSup = _minSup;
 }
 void Solver::input()
 {
-	char buff[110];
+	string buff;
 	int m, p, q, l;
-	while (fgets(buff,sizeof(buff),stdin))
+	ifstream in(inputPath);
+	while (getline(in, buff))
 	{
 		inputFilter.inputStr.push_back(buff);
-		if (strcmp(buff, "t # -1") == 0) break;
+		if (buff == "t # -1") break;
 		if (buff[0] == 't')
 		{
 			// sscanf(buff, "t # %d", &n);
@@ -20,21 +23,23 @@ void Solver::input()
 		}
 		else if (buff[0] == 'v')
 		{
-			sscanf(buff, "v %d %d", &m, &l);
+			sscanf(buff.c_str(), "v %d %d", &m, &l);
 			inputFilter.addv(m, l);
 		}
 		else if (buff[0] == 'e')
 		{
-			sscanf(buff, "e %d %d %d", &p, &q, &l);
+			sscanf(buff.c_str(), "e %d %d %d", &p, &q, &l);
 			inputFilter.adde(p, q, l);
 		}
 		else puts("Error!");
 	}
+	stTime = clock();
+	inputFilter.filter();
 	gspan.input(inputFilter, minSup);
 }
 void Solver::debug()
 {
-	cout<<gspan.freqEdge.size()<<endl;
+	cout << gspan.freqEdge.size() << endl;
 }
 void Solver::solve()
 {
@@ -42,5 +47,8 @@ void Solver::solve()
 }
 void Solver::output()
 {
-	debug();
+	//debug();
+	gspan.output();
+	edTime = clock();
+	cout << "Running Time: " << (double)(edTime - stTime) / (CLOCKS_PER_SEC / 1000.0) << "ms" << endl;
 }

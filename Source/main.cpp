@@ -1,11 +1,11 @@
-#include "firsthead.h"
+#include "head.h"
 #include "Solver.h"
 
 Solver solver;
 
 void init()
 {
-	solver.init();
+	solver.init("in.txt", 0.6);
 }
 void input()
 {
@@ -22,13 +22,19 @@ void output()
 
 int main()
 {
-#ifdef xysmlx
-	freopen("in.txt", "r", stdin);
-#endif
+	//freopen("debug.txt", "w", stdout);
 
 	init();
 	input();
 	solve();
 	output();
+
 	return 0;
 }
+
+/* Test data set
+ * Graph.data
+ * cntGraph == 10000
+ * vn < 250
+ * en < 250
+ */

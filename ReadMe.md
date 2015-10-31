@@ -1,6 +1,7 @@
 # gSpan
 
 *Frequent Sub-Graph Mining: C++ Edition*
+
 *Course Assignment*
 
 ---

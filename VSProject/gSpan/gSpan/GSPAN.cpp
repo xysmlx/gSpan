@@ -457,5 +457,5 @@ void GSPAN::output()
 			out << t.a << " " << t.b << " " << t.la << " " << t.lab << " " << t.lb << endl;
 		}
 	}
-	out << "Number of Frequent Pattern: " << freqPattern.size() << endl;
+	//out << "Number of Frequent Pattern: " << freqPattern.size() << endl;
 }
